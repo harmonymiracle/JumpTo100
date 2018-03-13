@@ -14,8 +14,8 @@ public class CameraFollow2D : MonoBehaviour {
 
 	void Start () {
 		target = GameObject.FindGameObjectWithTag (TagsManager.PLAYER).transform;
-		//offset = target.position.y - transform.position.y;
-		offset = target.position - transform.position;
+		offset = target.position.y - transform.position.y;
+		//offset = target.position - transform.position;
 		psController = FindObjectOfType<PlayerStateController> ();
 	}
 
@@ -25,7 +25,7 @@ public class CameraFollow2D : MonoBehaviour {
 
 			if ((transform.position.y + offset - target.position.y) > minLerpDistance) {
 				transform.position = new Vector3 (transform.position.x,
-					Mathf.Lerp (transform.position.y, target.position.y - offset, 2f),
+					Mathf.Lerp (transform.position.y, target.position.y - offset, .4f),
 					transform.position.z);
 			} else {
 				transform.position = new Vector3 (transform.position.x, target.position.y - offset, transform.position.z);
