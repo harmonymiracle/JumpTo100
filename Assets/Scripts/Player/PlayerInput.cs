@@ -18,11 +18,6 @@ public class PlayerInput : MonoBehaviour {
 		playerMove = GetComponent<PlayerMove> ();
 
 	}
-
-	void Start () {
-		
-	}
-	
 	
 	void Update () {
 		CheckInput ();

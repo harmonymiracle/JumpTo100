@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bowl
+  - Collision
+  - DeathArea
   layers:
   - Default
   - TransparentFX

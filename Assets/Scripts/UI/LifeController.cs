@@ -4,17 +4,22 @@ using UnityEngine.UI;
 
 public class LifeController : MonoBehaviour {
 
-	public Image[] image;
-	
+	[Tooltip ("Index 0 for life, index 1 for death")]
+	public Sprite[] sprites;
+	public Image[] lifeImages;
+	private int lifeAmount;
+
 	void Start () {
-		
-	}
-	
-	
-	void Update () {
-		
+		lifeAmount = lifeImages.Length;
 	}
 
+
+	public void ReplaceLifeIcon () {
+		if (lifeAmount >= 1) {
+			lifeImages [lifeAmount - 1].sprite = sprites [1];
+			lifeAmount--;
+		}
+	}
 
 
 }
