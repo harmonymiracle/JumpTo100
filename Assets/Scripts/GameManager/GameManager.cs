@@ -5,16 +5,17 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
 	public GameSettings gameSettings;
-	public int currentLevel = 0;
+	public int currentLevelNumber = 0;
 	public Transform levels;
 	public TextController textController;
 	public Transform player;
 
 	public float waitTime;
 	private LifeController lifeController;
+
 	private List<Transform> levelsList = new List<Transform> ();
 	private int leftLife;
-	private Transform lastLevel;
+	private Transform currentLevel;
 
 	void Awake () {
 		leftLife = gameSettings.leftLife;
@@ -25,7 +26,10 @@ public class GameManager : MonoBehaviour {
 			levelsList.Add (trans);
 		}
 
-		lastLevel = levelsList [0];
+
+		currentLevel = levelsList [currentLevelNumber];
+
+		//find the life Controller
 		lifeController = FindObjectOfType <LifeController> ();
 
 	}
@@ -80,14 +84,15 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void LaunchSetting () {
-		
+
+		// 需要处理如下事务：
+		// 1.关闭当前层级的 长条Collider。 2.disable 子物体。
 
 		// get the collision of current level, enable Trigger and disable Collision
-		Transform childTrans = lastLevel.GetChild (0);
-		lastLevel.GetComponent <BoxCollider2D> ().enabled = false;
+		Transform childTrans = currentLevel.GetChild (0);
+		currentLevel.GetComponent <BoxCollider2D> ().enabled = false;
 
 		childTrans.gameObject.SetActive (false);
-		print ("childTrans: " + childTrans);
 
 	}
 
@@ -96,24 +101,35 @@ public class GameManager : MonoBehaviour {
 		go.GetComponent<PolygonCollider2D> ().enabled = true;
 		go.GetComponent<BoxCollider2D> ().enabled = false;
 
+
+		go.GetComponentInParent<BoxCollider2D> ().enabled = true;
+
 	}
 
+	// 在发送之后我们做了什么：
+	// 首先 是 LaunchSetting 做的事要处理。
+	// 其次是 这个球如果碰到了长条碰撞器，怎么处理。如果没有碰到，怎么处理。
 
 	public void Reset () {
+
+		// reset the next level collider
+		Transform nextLevel = levelsList [currentLevelNumber + 1];
+		nextLevel.GetComponent<BowlReset> ().Reset ();
+
+
 		Rigidbody2D rb2d = player.GetComponent <Rigidbody2D> ();
 
-		Transform childTrans = lastLevel.GetChild (0);
+		Transform childTrans = currentLevel.GetChild (0);
 		childTrans.gameObject.SetActive (true);
-		lastLevel.GetComponent <BoxCollider2D> ().enabled = true;
+		currentLevel.GetComponent <BoxCollider2D> ().enabled = true;
 
 		rb2d.isKinematic = true;
-		player.position = lastLevel.GetChild (1).transform.position;
+		player.position = currentLevel.GetChild (1).transform.position;
 
 
-		BowlMovement bowlMove = lastLevel.GetComponent<BowlMovement> ();
+		BowlMovement bowlMove = currentLevel.GetComponent<BowlMovement> ();
 
 		rb2d.isKinematic = false;
-		print ("Reset");
 	}
 
 	public void SetUpBeforeFall (GameObject nextLevel) {
@@ -124,12 +140,13 @@ public class GameManager : MonoBehaviour {
 	public bool LandingOver (Transform trans, bool downDirection) {
 
 
-		if (trans != lastLevel && downDirection) {
-			currentLevel++;
-			textController.OnChangeLevel (currentLevel);
-			lastLevel = levelsList [currentLevel];
+		if (trans != currentLevel ) { //&& downDirection
+			currentLevelNumber++;
+			textController.OnChangeLevel (currentLevelNumber);
+			currentLevel = levelsList [currentLevelNumber];
 
-			print ("has Jumped, level up");
+			// 打开下一层级 Jump 触发器开关
+			currentLevel.GetComponent<BoxCollider2D> ().enabled = true;
 
 			return true;
 		} else {

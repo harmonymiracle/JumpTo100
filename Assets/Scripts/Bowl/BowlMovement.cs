@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+
+// 此处添加 一些对于bowl 对象的说明
+// bowl对象 本身添加有一个 BoxCollider2D 对象，这个是用于检测 
+// 球是否已正确落入碗中，以及球是否可以起跳
 public class BowlMovement : MonoBehaviour {
 
 	public float moveSpeed = 1f;

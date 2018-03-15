@@ -212,6 +212,11 @@ Prefab:
       propertyPath: m_Name
       value: Bowls (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114775397358845634, guid: 6c303d34c4f2b424c859433143018937,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c303d34c4f2b424c859433143018937, type: 2}
   m_IsPrefabParent: 0
