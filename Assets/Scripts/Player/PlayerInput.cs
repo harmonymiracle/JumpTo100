@@ -27,7 +27,6 @@ public class PlayerInput : MonoBehaviour {
 	void CheckInput () {
 		if (Input.GetMouseButtonDown (0)) {
 			playerMove.Move ();
-
 		}
 	}
 

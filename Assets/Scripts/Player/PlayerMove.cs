@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMove : MonoBehaviour {
 
 	public GameSettings gameSettings;
 	public float maxGroundedDistance = .4f;
+	public float minWaitForGrounded = .3f;
+	public float gravityScale = 1.0f;
+	// 当对象在空中时，该对象作为小球的父对象。
+	public Transform empty;
 
-	private Rigidbody2D rb2d;
-	private bool isGrounded = true;
+//	private bool isGrounded = true;
 	private Transform myTransform;
 	private GameManager gm;
-	private bool hasJumped = false;
 
-
+	private float yVelocity = 0;
+	private bool isGrounded = true;
 
 	void Awake () {
 		myTransform = transform;
-		rb2d = GetComponent <Rigidbody2D> ();
 		gm = FindObjectOfType <GameManager> ();
-
 	}
 		
 //	void FixedUpdate () {
@@ -51,41 +51,64 @@ public class PlayerMove : MonoBehaviour {
 
 
 
-	void OnTriggerEnter2D (Collider2D col) {
-		GameObject go = col.gameObject;
+	void FixedUpdate () {
 
-		switch (go.tag) {
+		if (!isGrounded) {
+			ApplyGravity ();
 
-		case TagsManager.BOWL:
-			isGrounded = true;
-			if (hasJumped) {
-				hasJumped = false;
-
-				gm.LandingOver (go.transform, rb2d.velocity.y < 0);
-
-				bool destroyTheTrigger = gm.LandingOver (go.transform, rb2d.velocity.y < 0);
-
-
-				if (destroyTheTrigger) {
-					go.GetComponent<BoxCollider2D> ().enabled = false;
-				}
-			}
-			break;
-
-		case TagsManager.COLLISION:
-			gm.SetUpBeforeFall (go);
-			break;
+			transform.Translate (Vector2.up * yVelocity * Time.deltaTime);
+		} else {
+			yVelocity = 0;
 		}
+
+
+	}
+
+	void ApplyGravity () {
+		yVelocity += Time.fixedDeltaTime * Physics2D.gravity.y * gravityScale;
 	}
 
 
+	void OnTriggerEnter2D (Collider2D col) {
+		GameObject go = col.gameObject;
+
+		if (go.CompareTag (TagsManager.BOWL)) {
+			StartCoroutine ("EnableGroundedTrigger");
+		}
+	}
+
+	void OnTriggerStay2D (Collider2D col) {
+		GameObject go = col.gameObject;
+
+		if (go.CompareTag (TagsManager.BOWL)) {
+			StartCoroutine ("EnableGroundedTrigger");
+		}
+	}
+
+	void OnTriggerExit2D (Collider2D col) {
+		GameObject go = col.gameObject;
+
+		if (go.CompareTag (TagsManager.BOWL)) {
+			isGrounded = false;
+		}
+	}
+
+	IEnumerator EnableGroundedTrigger () {
+
+		print ("Triggered!");
+		yield return new WaitForSeconds (minWaitForGrounded);
+		if (!isGrounded) {
+			isGrounded = true;
+		}
+
+
+	}
+
 	public void Move () {
 
-		if (isGrounded) {
-			rb2d.AddForce (gameSettings.jumpForce, ForceMode2D.Impulse);
-			isGrounded = false;
-			hasJumped = true;
-			gm.LaunchSetting ();
-		}
+		yVelocity += gameSettings.jumpForce.y;
+		isGrounded = false;
+
+
 	}
 }
