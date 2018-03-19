@@ -4,31 +4,35 @@ using UnityEngine;
 
 public class CameraFollow2D : MonoBehaviour {
 
-	public float minLerpDistance = 0.01f;
+	public float minLerpDistance = 4f;
 	public Transform target;
 
-	[SerializeField]
 	private float offset;
+	private float maxMergeDistance = .3f;
+	public Vector3 startPos;
 
 	void Start () {
 		target = GameObject.FindGameObjectWithTag (TagsManager.PLAYER).transform;
-		offset = target.position.y - transform.position.y;
-		//offset = target.position - transform.position;
+		startPos = transform.position;
+		offset = transform.position.y - target.position.y;
 	}
 
 
 	void LateUpdate () {
 
-		if ((transform.position.y + offset - target.position.y) > minLerpDistance) {
-			transform.position = new Vector3 (transform.position.x,
-				Mathf.Lerp (transform.position.y, target.position.y - offset, .4f),
-				transform.position.z);
-		} else {
-			transform.position = new Vector3 (transform.position.x, target.position.y - offset, transform.position.z);
+		if ((offset + target.position.y - transform.position.y) > minLerpDistance) {
 
-		}
+			if ((offset + target.position.y - transform.position.y - minLerpDistance) > maxMergeDistance) {
+				transform.Translate (Vector3.up * Mathf.Lerp (transform.position.y, target.position.y + offset - minLerpDistance, .2f) * Time.deltaTime);
+
+			} else {
+				transform.Translate (Vector3.up * (target.position.y + offset - minLerpDistance - transform.position.y));
+			}
+		} 
 	}
 
-
-
+	public void ResetPosition () {
+		transform.position = startPos;
+	}
+		
 }

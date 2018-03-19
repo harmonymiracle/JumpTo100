@@ -5,9 +5,13 @@ using UnityEngine;
 [CreateAssetMenu (fileName = "Data", menuName = "GameSettings", order = 1)]
 public class GameSettings : ScriptableObject {
 
-	public const float JumpSqrtRoot = 6.57f;
+	public GameDifficulty gameDifficulty;
 
-	public int leftLife = 3;
+	public const float JumpSqrtRoot = 6.57f;
+	public const float SCREEN_HORIZONTAL_LIMIT = 4.4F;
+	public float speedLimt = 3.5f;
+	public int startLife = 3;
+	public float screenHorizontalLimit = SCREEN_HORIZONTAL_LIMIT;
 	public Vector2 jumpForce = Vector2.up * JumpSqrtRoot;
 	//
 }

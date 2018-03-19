@@ -39,25 +39,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4453169257660694}
   - component: {fileID: 61918393402691006}
-  - component: {fileID: 114157299225865234}
+  - component: {fileID: 114267980779850176}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Collision
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1954240464334610
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4644130861809914}
-  m_Layer: 0
-  m_Name: SpawnPoint
-  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,11 +54,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021785131539770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.478, y: 2.2, z: 0}
+  m_LocalPosition: {x: 1.19, y: 2.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4453169257660694}
-  - {fileID: 4644130861809914}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -90,19 +74,6 @@ Transform:
   m_Father: {fileID: 4330167160465606}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4644130861809914
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1954240464334610}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4330167160465606}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61918393402691006
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -112,7 +83,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.76}
@@ -134,7 +105,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021785131539770}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -151,9 +122,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4062646, y: 0.15830472}
+  m_Size: {x: 0.48, y: 0.15830472}
   m_EdgeRadius: 0
---- !u!114 &114157299225865234
+--- !u!114 &114267980779850176
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -161,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078727532877600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5df08663e718f6498cfb6ddcddc75e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c2d8061be558584c849fa7370317c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114365424723879390
@@ -187,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298c52ac1d1cd1848839d59cc9874300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 1.48
   moveLimit: 2.4
 --- !u!212 &212558677285469214
 SpriteRenderer:

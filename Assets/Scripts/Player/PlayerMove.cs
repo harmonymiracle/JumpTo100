@@ -12,103 +12,51 @@ public class PlayerMove : MonoBehaviour {
 	// 当对象在空中时，该对象作为小球的父对象。
 	public Transform empty;
 
-//	private bool isGrounded = true;
 	private Transform myTransform;
 	private GameManager gm;
 
 	private float yVelocity = 0;
 	private bool isGrounded = true;
+	private Rigidbody2D rb2d;
+	public bool IsGrounded {
+		get { return isGrounded; }
+		set { isGrounded = true; }
+	}
 
 	void Awake () {
 		myTransform = transform;
 		gm = FindObjectOfType <GameManager> ();
+		rb2d = GetComponent <Rigidbody2D> ();
 	}
-		
-//	void FixedUpdate () {
-//		CheckIfGrounded ();
-//		print (isGrounded);
-//	}
-//
-//	void CheckIfGrounded () {
-//
-//		Collider2D collider = Physics2D.OverlapCircle (Vector2.zero, maxGroundedDistance);
-//
-//		if (collider != null) {
-//			if (collider.tag.Equals (TagsManager.COLLISION)) {
-//				isGrounded = true;
-//				print ("right: " + collider.name);
-//
-//			} else {
-//				print ("false: " + collider.name);
-//			}
-//
-//		} else {
-//
-//			print ("null");
-//		}
-//
-//	}
-
-
 
 	void FixedUpdate () {
 
 		if (!isGrounded) {
-			ApplyGravity ();
+			// 应用模拟重力
+			yVelocity += Time.fixedDeltaTime * Physics2D.gravity.y * gravityScale;
 
 			transform.Translate (Vector2.up * yVelocity * Time.deltaTime);
 		} else {
 			yVelocity = 0;
 		}
-
-
-	}
-
-	void ApplyGravity () {
-		yVelocity += Time.fixedDeltaTime * Physics2D.gravity.y * gravityScale;
 	}
 
 
-	void OnTriggerEnter2D (Collider2D col) {
-		GameObject go = col.gameObject;
+	public void Move () {
+		if (isGrounded) {
 
-		if (go.CompareTag (TagsManager.BOWL)) {
-			StartCoroutine ("EnableGroundedTrigger");
-		}
-	}
+			// 避免当前level的速度对Player造成影响
+			transform.SetParent (empty);
 
-	void OnTriggerStay2D (Collider2D col) {
-		GameObject go = col.gameObject;
-
-		if (go.CompareTag (TagsManager.BOWL)) {
-			StartCoroutine ("EnableGroundedTrigger");
-		}
-	}
-
-	void OnTriggerExit2D (Collider2D col) {
-		GameObject go = col.gameObject;
-
-		if (go.CompareTag (TagsManager.BOWL)) {
+			gm.LaunchSetting ();
+			yVelocity += gameSettings.jumpForce.y;
 			isGrounded = false;
 		}
 	}
 
-	IEnumerator EnableGroundedTrigger () {
-
-		print ("Triggered!");
-		yield return new WaitForSeconds (minWaitForGrounded);
-		if (!isGrounded) {
-			isGrounded = true;
-		}
-
-
+	public void Reset () {
+		yVelocity = 0;
+		isGrounded = true;
 	}
 
-	public void Move () {
-
-		yVelocity += gameSettings.jumpForce.y;
-		isGrounded = false;
-
-
-	}
 }

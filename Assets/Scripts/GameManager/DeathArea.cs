@@ -14,6 +14,7 @@ public class DeathArea : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D col) {
 		switch (col.gameObject.tag) {
 		case TagsManager.PLAYER:
+
 			gm.LoseLife ();
 			break;
 		}

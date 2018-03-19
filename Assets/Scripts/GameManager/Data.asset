@@ -9,7 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15eb3b8e4a7ad4c4492e8426b3a92ad8, type: 3}
-  m_Name: GameSettings
+  m_Name: Data
   m_EditorClassIdentifier: 
+  speedLimt: 3.5
   leftLife: 3
+  screenHorizontalLimit: 4.4
   jumpForce: {x: 0, y: 7.1}
