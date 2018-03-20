@@ -19,13 +19,10 @@ public class LevelText : MonoBehaviour {
 
 	public void OnChangeLevel (int level) {
 
-		AnimControl (level);
-	}
-
-	void AnimControl (int level) {
-
 		StartCoroutine ("DelayFixedTime", level); 
+
 	}
+
 
 	IEnumerator DelayFixedTime (int level) {
 		anim.SetBool ("Level Change", true);

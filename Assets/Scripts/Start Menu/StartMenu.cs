@@ -11,35 +11,41 @@ public class StartMenu : MonoBehaviour {
 	public GameObject continueButton;
 	public GameSettings gameSettings;
 
-	private GameDifficulty difficulty = GameDifficulty.Easy;
+	private GameMaster gameMaster;
 
+	private GameDifficulty difficulty = GameDifficulty.Easy;
 
 	private bool isShowDifficultyPanel = false;
 	private bool isShowAchievementsPanel = false;
 
-
-	public void ContinueGame () {
-		if (PlayerPrefs.HasKey (StringsManager.CURRENT_DIFFICULTY)) {
-			continueButton.SetActive (true);
+	public void Awake () {
+		gameMaster = FindObjectOfType <GameMaster> ();
+		if (gameMaster.HasSave) {
+			Init ();
 		}
 	}
 
-	public void NewGame () {
+	public void Init () {
+		continueButton.SetActive (true);
+	}
+
+	public void ContinueGame () {
+		gameMaster.isNewGame = false;
 		SceneManager.LoadScene (StringsManager.Scene_Level1);
 	}
 
-
+	public void NewGame () {
+		gameMaster.isNewGame = true;
+		SceneManager.LoadScene (StringsManager.Scene_Level1);
+	}
 
 	// 这里使用了 “魔数”，是根据是实际情况调整的，后续可以改善
 	public void ToggleDifficultyPanel () {
-		print ("trans pos: " + difficultyPanel.transform.position);
 
 		if (!isShowDifficultyPanel) {
 			difficultyPanel.transform.localPosition = new Vector3 (0, 6f, 0f);
-			print ("trans pos: " + difficultyPanel.transform.position);
 		} else {
 			difficultyPanel.transform.localPosition = new Vector3 (800f, 6f, 0f);
-			print ("trans pos: " + difficultyPanel.transform.position);
 		}
 		isShowDifficultyPanel = !isShowDifficultyPanel;
 	}

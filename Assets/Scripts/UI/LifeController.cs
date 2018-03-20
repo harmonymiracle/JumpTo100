@@ -11,10 +11,20 @@ public class LifeController : MonoBehaviour {
 
 	[Tooltip ("The three icons left top")]
 	public Image[] lifeImages;
+	public GameSettings gameSettings;
+
 	private int lifeAmount;
 
 	void Start () {
-		lifeAmount = lifeImages.Length;
+		StartCoroutine (DelayUpdateLifeAmount ());
+	}
+
+	IEnumerator DelayUpdateLifeAmount () {
+		yield return new WaitForSeconds (.3f);
+		lifeAmount = gameSettings.leftLife >= 0 ? gameSettings.leftLife : 0;
+		for (int i = lifeAmount; i < 3; i++) {
+			lifeImages [i].sprite = sprites [1];
+		}
 	}
 
 
@@ -51,6 +61,10 @@ public class LifeController : MonoBehaviour {
 			lifeImages[i].sprite = sprites [0];
 			UpdateText ((i + 1));
 		}
+	}
+
+	public void RefreshLifeText () {
+		UpdateText (gameSettings.leftLife);
 	}
 
 

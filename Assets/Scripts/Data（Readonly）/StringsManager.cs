@@ -3,7 +3,7 @@ public class StringsManager {
 
 	// 用于场景识别
 	public const string Splash = "Splash";
-	public const string Start = "Start";
+	public const string Scene_Start = "Start";
 	public const string Scene_Level1 = "Game";
 
 
@@ -12,6 +12,7 @@ public class StringsManager {
 	public const string HIGHEST_LEVEL = "highest_level";
 	public const string CURRENT_LEVEL = "current_level";
 	public const string CURRENT_DIFFICULTY = "current_difficulty";
+	public const string LEFT_LIFE = "left_life";
 
 
 	// 用于UI

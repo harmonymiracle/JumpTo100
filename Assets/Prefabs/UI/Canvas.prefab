@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 114017158470882640}
   - component: {fileID: 114493364321489064}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -526,7 +526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1803757875243720
 GameObject:
   m_ObjectHideFlags: 1
@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 114820318113870188}
   - component: {fileID: 114634572259528180}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Main Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -965,7 +965,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114522129870119936}
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
@@ -1405,6 +1405,7 @@ MonoBehaviour:
   - {fileID: 114330728154425574}
   - {fileID: 114061739185027930}
   - {fileID: 114377630085378246}
+  gameSettings: {fileID: 11400000, guid: bbe4994f8099b1f4ea3b85a8f4d9472d, type: 2}
 --- !u!114 &114409778978242484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1499,12 +1500,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 114522129870119936}
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1725,7 +1726,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114017158470882640}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114522129870119936}
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114499834538259118
@@ -1775,6 +1787,7 @@ MonoBehaviour:
   settingsPanel: {fileID: 1691998815510904}
   volumeImg: {fileID: 114832472758545414}
   volumeSilder: {fileID: 114882520752453452}
+  failPanelText: {fileID: 114309082236890334}
 --- !u!114 &114522822596493356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1920,7 +1933,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114820318113870188}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114522129870119936}
+        m_MethodName: ReturnToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114660096204829562
@@ -3468,7 +3492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.14045}
   m_AnchorMax: {x: 1, y: 0.70375353}
-  m_AnchoredPosition: {x: 9.9, y: 0}
+  m_AnchoredPosition: {x: 9.8999, y: 37.5}
   m_SizeDelta: {x: -169.8, y: -75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224916340419389592

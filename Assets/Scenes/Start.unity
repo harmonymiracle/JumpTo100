@@ -1105,7 +1105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newGameText: {fileID: 637711488}
   difficultyPanel: {fileID: 1087769431}
-  continueButton: {fileID: 0}
+  continueButton: {fileID: 1446006261}
   gameSettings: {fileID: 11400000, guid: bbe4994f8099b1f4ea3b85a8f4d9472d, type: 2}
 --- !u!1 &761878220
 GameObject:
@@ -1276,6 +1276,7 @@ GameObject:
   - component: {fileID: 940103423}
   - component: {fileID: 940103425}
   - component: {fileID: 940103424}
+  - component: {fileID: 940103426}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1313,7 +1314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.25600004, g: 0.872, b: 0.43867588, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1340,6 +1341,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 940103422}
+--- !u!114 &940103426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 940103422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b8234e5d413fe429fcf4725db003bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 940103424}
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1014198310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,8 +1429,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 445766712}
   m_HandleRect: {fileID: 445766711}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.73757875
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1593,7 +1607,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5386\u53F2\u6210\u5C31"
+  m_Text: "\u6210\u5C31(\u5F85\u7EED)"
 --- !u!222 &1116934979
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1733,7 +1747,7 @@ GameObject:
   - component: {fileID: 1158974999}
   - component: {fileID: 1158974998}
   m_Layer: 5
-  m_Name: History Achievenments
+  m_Name: Achievenments
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2325,7 +2339,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000103284896, y: 132.98114}
+  m_AnchoredPosition: {x: -0.000103284896, y: -0.00015830994}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1378144917
@@ -2478,12 +2492,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 758055819}
+        m_MethodName: ContinueGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

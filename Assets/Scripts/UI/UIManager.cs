@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
@@ -13,34 +14,39 @@ public class UIManager : MonoBehaviour {
 	public GameObject settingsPanel;
 	public Image volumeImg;
 	public Slider volumeSilder;
+	public Text failPanelText;
 
 	private bool isFailPanelDisplay = false;
 	private bool isSettingsPanelDisplay = false;
 	private LifeController lifeController;
 
 	private GameManager gm;
-	private PlayerSettings playerSettings;
-
+	private GameSettings gameSettings;
 	private float lastVolume = .5f;
 	private float currentVolume = .5f;
 
-	void Start () {
+	void Awake () {
+		// 该语句 需要在GameManager Start 之前，因为有时需要刷新LifeText
 		lifeController = FindObjectOfType <LifeController> ();
+	}
+
+	void Start () {
+		
 		gm = FindObjectOfType <GameManager> ();
-		playerSettings = FindObjectOfType <PlayerSettings> ();
+		gameSettings = gm.gameSettings;
+		currentVolume = gameSettings.soundVolume;
 	}
 
 
 	private void SettingsPanelDisplay () {
 		if (!isSettingsPanelDisplay) {
 			settingsPanel.SetActive (true);
-			lastVolume = playerSettings.GetSoundVolume ();
 			gm.DisableInput ();
+			currentVolume = gameSettings.soundVolume;
 		} else {
 			settingsPanel.SetActive (false);
 			gm.EnableInput ();
-			playerSettings.SetSoundVolume (currentVolume);
-
+			gameSettings.soundVolume = currentVolume;
 		}
 		isSettingsPanelDisplay = !isSettingsPanelDisplay;
 	}
@@ -72,15 +78,27 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void Fail () {
+		failPanelText.text = gm.currentLevelNumber.ToString();
 		FailPanelDisplay ();
+
 	}
 
 	public void Restart () {
-		FailPanelDisplay ();
+		if (isFailPanelDisplay) {
+			FailPanelDisplay ();
+		}
+		if (isSettingsPanelDisplay) {
+			SettingsPanelDisplay ();
+		}
+
 		lifeController.Restart ();
 		levelText.OnChangeLevel (0);
+		gm.Restart ();
 	}
 
+	public void RefreshLifeText () {
+		lifeController.RefreshLifeText ();
+	}
 
 	public void MuteMusic () {
 		volumeSilder.value = 0;
@@ -103,6 +121,11 @@ public class UIManager : MonoBehaviour {
 	public void ToggleSettingsPanel () {
 		
 		SettingsPanelDisplay ();
+	}
+
+	public void ReturnToMainMenu () {
+		gameSettings.soundVolume = currentVolume;
+		gm.ReturnToMainMenu ();
 	}
 
 

@@ -7,32 +7,31 @@ public class CameraFollow2D : MonoBehaviour {
 	public float minLerpDistance = 4f;
 	public Transform target;
 
-	private float offset;
+	private Vector3 offset = new Vector3 (0f, 3.8f, -10f);
 	private float maxMergeDistance = .3f;
-	public Vector3 startPos;
 
-	void Start () {
+	public void Awake () {
 		target = GameObject.FindGameObjectWithTag (TagsManager.PLAYER).transform;
-		startPos = transform.position;
-		offset = transform.position.y - target.position.y;
+		offset = transform.position - target.position;
 	}
-
 
 	void LateUpdate () {
 
-		if ((offset + target.position.y - transform.position.y) > minLerpDistance) {
+		if ((offset.y + target.position.y - transform.position.y) > minLerpDistance) {
 
-			if ((offset + target.position.y - transform.position.y - minLerpDistance) > maxMergeDistance) {
-				transform.Translate (Vector3.up * Mathf.Lerp (transform.position.y, target.position.y + offset - minLerpDistance, .2f) * Time.deltaTime);
+			if ((offset.y + target.position.y - transform.position.y - minLerpDistance) > maxMergeDistance) {
+				transform.Translate (Vector3.up * Mathf.Lerp (transform.position.y, target.position.y + offset.y - minLerpDistance, .2f) * Time.deltaTime);
 
 			} else {
-				transform.Translate (Vector3.up * (target.position.y + offset - minLerpDistance - transform.position.y));
+				transform.Translate (Vector3.up * (target.position.y + offset.y - minLerpDistance - transform.position.y));
 			}
 		} 
 	}
 
 	public void ResetPosition () {
-		transform.position = startPos;
+		Vector3 temp = target.position + offset;
+		// 防止 视界出现左右移动
+		transform.position = new Vector3 (0f, temp.y, temp.z);
 	}
 		
 }
