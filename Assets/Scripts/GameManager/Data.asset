@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15eb3b8e4a7ad4c4492e8426b3a92ad8, type: 3}
   m_Name: Data
   m_EditorClassIdentifier: 
-  gameDifficulty: 1
+  gameDifficulty: 0
   speedLimt: 3.5
-  leftLife: 0
+  leftLife: 3
   screenHorizontalLimit: 4.4
   jumpForce: {x: 0, y: 7.1}
   soundVolume: 0.5
   highestLevelHistory: 0
-  currentLevel: 1
+  currentLevel: 0

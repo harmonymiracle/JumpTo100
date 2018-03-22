@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-	public const int TOTALLEVELNUMBER = 90;
+	public const int TOTALLEVELNUMBER = 30;
 	public const float LEVELOFFSETHEIGHT = 2.2f;
 
 	public GameSettings gameSettings;
@@ -49,7 +49,10 @@ public class GameManager : MonoBehaviour {
 
 
 	void Awake () {
-		audioManager = GetComponent<AudioManager> ();
+		//audioManager = GetComponent<AudioManager> ();
+
+		audioManager = FindObjectOfType <AudioManager> ();
+
 		gameMaster = FindObjectOfType <GameMaster> ();
 		playerSettings = gameMaster.transform.GetComponent <PlayerSettings> ();
 		isNewGame = gameMaster.isNewGame;
@@ -189,9 +192,6 @@ public class GameManager : MonoBehaviour {
 
 	#region Jump And Fall Manage Area
 
-	public void JumpSound () {
-		audioManager.JumpSound ();
-	}
 
 	public void LoseLife () {
 		
@@ -228,7 +228,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void LaunchSetting () {
-		JumpSound ();
+
+		// 在这里发声
+		audioManager.JumpSound ();
+
 		currentLevel.GetComponent <BoxCollider2D> ().enabled = false;
 	}
 

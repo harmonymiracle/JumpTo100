@@ -2,22 +2,64 @@
 
 public class AudioManager : MonoBehaviour {
 
+	public SceneLoadManager sceneLoadManager;
 
-	public AudioSource playerAudioSource;
-	public AudioListener audioListener;
+	public AudioClip startBgm;
 
-	private AudioClip jumpAudioClip;
+	public AudioClip jumpSound;
+	public AudioClip landSound;
 
-	private GameManager gm;
+	private AudioSource audioSource;
 
-	void Start () {
-		jumpAudioClip = playerAudioSource.clip;
+	private AudioSource playerAudioSource;
+
+
+//	public AudioSource playerAudioSource;
+//
+//	private AudioClip jumpAudioClip;
+//
+
+	void Awake () {
+		DontDestroyOnLoad (gameObject);
+		audioSource = GetComponent <AudioSource> ();
 
 	}
 
-	public void JumpSound () {
+	void OnEnable () {
+		sceneLoadManager.OnLoadStartScene += LoadStartScene;
+		sceneLoadManager.OnLoadGameScene += LoadGameScene;
+	}
+
+	void OnDisable () {
+		sceneLoadManager.OnLoadStartScene -= LoadStartScene;
+		sceneLoadManager.OnLoadGameScene -= LoadGameScene;
+
+	}
+
+
+	public void LandSound () {
+		playerAudioSource.clip = landSound;
 		playerAudioSource.Play ();
 	}
 
+	public void JumpSound () {
+		playerAudioSource.clip = jumpSound;
+		playerAudioSource.Play ();
+	}
+
+
+	void LoadStartScene () {
+		
+		audioSource.clip = startBgm;
+		audioSource.volume = .8f;
+		audioSource.loop = true;
+		audioSource.Play ();
+
+	}
+
+	void LoadGameScene () {
+		playerAudioSource = GameObject.FindGameObjectWithTag (TagsManager.PLAYER).GetComponent <AudioSource> ();
+
+	}
 
 }

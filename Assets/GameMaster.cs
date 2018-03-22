@@ -6,6 +6,7 @@ using System;
 public class GameMaster : MonoBehaviour {
 
 	private PlayerSettings playerSettings;
+	private SceneLoadManager sceneLoadManager;
 	private StartMenu startMenu;
 
 	private bool hasSave;
@@ -15,25 +16,16 @@ public class GameMaster : MonoBehaviour {
 			return hasSave;
 		}
 	}
-
-
 	public bool isNewGame;
 
 	public void Awake () {
-		PlayerPrefs.DeleteAll ();
-
 		DontDestroyOnLoad (gameObject);
+		sceneLoadManager = GetComponent <SceneLoadManager> ();
 	}
 
 	public void Start () {
 		playerSettings = GetComponent <PlayerSettings> ();
-		LoadNextScene ();
+		sceneLoadManager.LoadStartScene ();
 	}
-
-
-	public void LoadNextScene () {
-		SceneManager.LoadScene (StringsManager.Scene_Start);
-	}
-
 
 }

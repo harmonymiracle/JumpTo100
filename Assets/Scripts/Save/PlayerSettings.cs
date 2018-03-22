@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 该类目的是 存储状态信息到 本地，也就是PlayerPrefs。
+// 不过在有 ScriptableObject Asset的情况下，好像可以省却这一步，那个本身就可以作为存档。
+// 并且其优越性可能更高，因为Asset可以存储对象。
+
 public class PlayerSettings : MonoBehaviour {
 
 	// 一些字符串，用于PlayerPrefs 存储的key
@@ -69,9 +73,7 @@ public class PlayerSettings : MonoBehaviour {
 					currentDifficulty = GameDifficulty.Hard;
 					break;
 				}
-			} else {
-				
-			}
+			} 
 			return currentDifficulty;
 		}
 		set {
@@ -88,7 +90,6 @@ public class PlayerSettings : MonoBehaviour {
 
 				return leftLife;
 			} 
-			//Debug.LogError ("Dont has key, but access");
 			return 3;
 		}
 		set {

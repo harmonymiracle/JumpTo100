@@ -12,31 +12,30 @@ public class StartMenu : MonoBehaviour {
 	public GameSettings gameSettings;
 
 	private GameMaster gameMaster;
-
 	private GameDifficulty difficulty = GameDifficulty.Easy;
 
 	private bool isShowDifficultyPanel = false;
 	private bool isShowAchievementsPanel = false;
 
+	private SceneLoadManager sceneLoadManager;
 	public void Awake () {
 		gameMaster = FindObjectOfType <GameMaster> ();
-		if (gameMaster.HasSave) {
-			Init ();
-		}
-	}
+		sceneLoadManager = FindObjectOfType <SceneLoadManager> ();
 
-	public void Init () {
-		continueButton.SetActive (true);
+		if (gameMaster.HasSave) {
+			continueButton.SetActive (true);
+		}
+
 	}
 
 	public void ContinueGame () {
 		gameMaster.isNewGame = false;
-		SceneManager.LoadScene (StringsManager.Scene_Level1);
+		sceneLoadManager.LoadGameScene ();
 	}
 
 	public void NewGame () {
 		gameMaster.isNewGame = true;
-		SceneManager.LoadScene (StringsManager.Scene_Level1);
+		sceneLoadManager.LoadGameScene ();
 	}
 
 	// 这里使用了 “魔数”，是根据是实际情况调整的，后续可以改善
@@ -83,6 +82,7 @@ public class StartMenu : MonoBehaviour {
 
 			break;
 		}
+		ToggleDifficultyPanel ();
 
 		gameSettings.gameDifficulty = difficulty;
 
