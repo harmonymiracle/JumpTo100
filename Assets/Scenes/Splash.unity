@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6572a95e3cdfaa843bdcc1497f613912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneLoadManager: {fileID: 0}
+  sceneLoadManager: {fileID: 2094374234}
   startBgm: {fileID: 8300000, guid: 23bfb4c235ab4fc4d8414925601c2b12, type: 3}
   jumpSound: {fileID: 8300000, guid: 00597bbc922beee43b9b9f77f990b51e, type: 3}
   landSound: {fileID: 8300000, guid: 472f5c05346c9fe4a9acde4afe72dc7b, type: 3}

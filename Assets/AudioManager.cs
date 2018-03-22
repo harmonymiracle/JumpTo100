@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour {
 
@@ -33,10 +34,7 @@ public class AudioManager : MonoBehaviour {
 	void OnDisable () {
 		sceneLoadManager.OnLoadStartScene -= LoadStartScene;
 		sceneLoadManager.OnLoadGameScene -= LoadGameScene;
-
 	}
-
-
 	public void LandSound () {
 		playerAudioSource.clip = landSound;
 		playerAudioSource.Play ();
@@ -58,8 +56,16 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	void LoadGameScene () {
+
+		StartCoroutine (FindAudio());
+
+	}
+
+	IEnumerator FindAudio () {
+		yield return null;
 		playerAudioSource = GameObject.FindGameObjectWithTag (TagsManager.PLAYER).GetComponent <AudioSource> ();
 
 	}
+
 
 }

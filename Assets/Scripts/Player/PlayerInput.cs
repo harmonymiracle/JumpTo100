@@ -8,8 +8,6 @@ using UnityEngine.EventSystems;
 [RequireComponent (typeof(PlayerMove))]
 public class PlayerInput : MonoBehaviour {
 
-	public float distance = 10000f;
-
 	private PlayerMove playerMove;
 	private GameManager gm;
 
